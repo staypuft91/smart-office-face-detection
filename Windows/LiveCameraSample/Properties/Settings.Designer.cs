@@ -37,6 +37,21 @@ namespace LiveCameraSample.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("53f42291-f58e-4020-a67d-d2c8f30144f7")]
+        public string PersonGroupId
+        {
+            get
+            {
+                return ((string)(this["PersonGroupId"]));
+            }
+            set
+            {
+                this["PersonGroupId"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string VisionAPIKey {
             get {
@@ -118,7 +133,7 @@ namespace LiveCameraSample.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://westus.api.cognitive.microsoft.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://face-api-bcn-smart-office.cognitiveservices.azure.com/")]
         public string FaceAPIHost {
             get {
                 return ((string)(this["FaceAPIHost"]));
@@ -130,13 +145,16 @@ namespace LiveCameraSample.Properties {
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://westus.api.cognitive.microsoft.com")]
-        public string VisionAPIHost {
-            get {
-                return ((string)(this["VisionAPIHost"]));
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/Users/Cristian.Rodriguez/OneDrive - ISOLUTIONS AG/Desktop/Faces")]
+        public string LocalUrl
+        {
+            get
+            {
+                return ((string)(this["LocalUrl"]));
             }
-            set {
-                this["VisionAPIHost"] = value;
+            set
+            {
+                this["LocalUrl"] = value;
             }
         }
     }

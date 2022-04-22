@@ -1,37 +1,4 @@
-﻿// 
-// Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license.
-// 
-// Microsoft Cognitive Services: http://www.microsoft.com/cognitive
-// 
-// Microsoft Cognitive Services Github:
-// https://github.com/Microsoft/Cognitive
-// 
-// Copyright (c) Microsoft Corporation
-// All rights reserved.
-// 
-// MIT License:
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-// 
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// 
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text;
 using System.Windows;
@@ -44,7 +11,7 @@ namespace LiveCameraSample
 {
     public class Visualization
     {
-        private static SolidColorBrush s_lineBrush = new SolidColorBrush(new System.Windows.Media.Color { R = 255, G = 185, B = 0, A = 255 });
+        private static SolidColorBrush s_lineBrush = new SolidColorBrush(new Color { R = 255, G = 185, B = 0, A = 255 });
         private static Typeface s_typeface = new Typeface(new FontFamily("Segoe UI"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal);
 
         private static BitmapSource DrawOverlay(BitmapSource baseImage, Action<DrawingContext, double> drawAction)
@@ -87,7 +54,7 @@ namespace LiveCameraSample
                         42 * annotationScale, Brushes.Black);
                     // Instead of calling DrawText (which can only draw the text in a solid colour), we
                     // convert to geometry and use DrawGeometry, which allows us to add an outline. 
-                    var geom = ft.BuildGeometry(new System.Windows.Point(10 * annotationScale, y));
+                    var geom = ft.BuildGeometry(new Point(10 * annotationScale, y));
                     drawingContext.DrawGeometry(s_lineBrush, new Pen(Brushes.Black, 2 * annotationScale), geom);
                     // Move line down
                     y += 42 * annotationScale;
@@ -97,7 +64,7 @@ namespace LiveCameraSample
             return DrawOverlay(baseImage, drawAction);
         }
 
-        public static BitmapSource DrawFaces(BitmapSource baseImage, FaceAPI.Models.DetectedFace[] faces, string[] celebName)
+        public static BitmapSource DrawFaces(BitmapSource baseImage, FaceAPI.Models.DetectedFace[] faces)
         {
             if (faces == null)
             {
@@ -127,11 +94,6 @@ namespace LiveCameraSample
                         }
                     }
 
-                    if (celebName?[i] != null)
-                    {
-                        summary.Append(celebName[i]);
-                    }
-
                     faceRect.Inflate(6 * annotationScale, 6 * annotationScale);
 
                     double lineThickness = 4 * annotationScale;
@@ -151,7 +113,7 @@ namespace LiveCameraSample
 
                         var ypad = pad;
                         var xpad = pad + 4 * annotationScale;
-                        var origin = new System.Windows.Point(
+                        var origin = new Point(
                             faceRect.Left + xpad - lineThickness / 2,
                             faceRect.Top - ft.Height - ypad + lineThickness / 2);
                         var rect = ft.BuildHighlightGeometry(origin).GetRenderBounds(null);

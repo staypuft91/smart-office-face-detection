@@ -13,21 +13,21 @@
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Name="ButtonBar">
-            <ComboBox x:Name="CameraList" Width="100" Margin="5,5,0,5" Loaded="CameraList_Loaded" />
-            <Button Content="Start Camera" Padding="5,0" Margin="5,5,0,5" Click="StartButton_Click" />
-            <Button Content="Stop Camera" Padding="5,0" Margin="5,5,0,5" Click="StopButton_Click" />
-            <TextBlock VerticalAlignment="Center" Margin="15,5,0,5" Text="Mode:" />
-            <ComboBox x:Name="ModeList" Width="100" Margin="5,5,0,5" Loaded="ModeList_Loaded" SelectionChanged="ModeList_SelectionChanged" />
+            <ComboBox x:Name="CameraList" Width="100" Margin="5,5,0,5" Loaded="LoadCameraList" />
+            <Button Content="Start Camera" Padding="5,0" Margin="5,5,0,5" Click="StartCamera" />
+            <Button Content="Stop Camera" Padding="5,0" Margin="5,5,0,5" Click="StopCamera" />
+            <Button Content="Train Person Group" Padding="5,0" Margin="5,5,0,5" Click="CreateAndTrainPersonGroup"/>
         </StackPanel>
-        <Button Content="Show/Hide Settings" Padding="5,0" Margin="5" Click="SettingsButton_Click" HorizontalAlignment="Right" />
+        <Button Content="Show/Hide Settings" Padding="5,0" Margin="5" Click="SettingsVisibility" HorizontalAlignment="Right" />
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="363*" />
+                <ColumnDefinition Width="68*" />
+                <ColumnDefinition Width="295*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="LeftImage" Grid.Column="0" Margin="5" />
-            <Image x:Name="RightImage" Grid.Column="1" Margin="5" Panel.ZIndex="1" />
-            <StackPanel Visibility="{Binding Source={StaticResource Settings}, Path=Default.SettingsPanelVisibility, Mode=TwoWay}" Grid.Column="1" Panel.ZIndex="2" Name="SettingsPanel" Background="LightGray" VerticalAlignment="Top" Margin="5">
+            <Image x:Name="LeftImage" Grid.Column="0" Margin="5,5,4,5" />
+            <Image x:Name="RightImage" Grid.Column="1" Margin="6,5,5,5" Panel.ZIndex="1" Grid.ColumnSpan="2" />
+            <StackPanel Visibility="{Binding Source={StaticResource Settings}, Path=Default.SettingsPanelVisibility, Mode=TwoWay}" Grid.Column="1" Panel.ZIndex="2" Name="SettingsPanel" Background="LightGray" VerticalAlignment="Top" Margin="6,5,5,0" Grid.ColumnSpan="2">
                 <TextBlock Margin="5" Grid.Row="0" FontWeight="Bold" Text="Settings"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -49,10 +49,10 @@
                     <TextBox   Margin="5" Grid.Row="0" Grid.Column="1" Text="{Binding Source={StaticResource Settings}, Path=Default.FaceAPIKey, Mode=TwoWay}" />
                     <TextBlock Margin="5" Grid.Row="1" Grid.Column="0" Text="Face API Host:" />
                     <TextBox   Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding Source={StaticResource Settings}, Path=Default.FaceAPIHost, Mode=TwoWay}" />
-                    <TextBlock Margin="5" Grid.Row="2" Grid.Column="0" Text="Vision API Key:" />
-                    <TextBox   Margin="5" Grid.Row="2" Grid.Column="1" Text="{Binding Source={StaticResource Settings}, Path=Default.VisionAPIKey, Mode=TwoWay}" />
-                    <TextBlock Margin="5" Grid.Row="3" Grid.Column="0" Text="Vision API Host:" />
-                    <TextBox   Margin="5" Grid.Row="3" Grid.Column="1" Text="{Binding Source={StaticResource Settings}, Path=Default.VisionAPIHost, Mode=TwoWay}" />
+                    <TextBlock Margin="5" Grid.Row="2" Grid.Column="0" Text="Person Group ID:" />
+                    <TextBox   Margin="5" Grid.Row="2" Grid.Column="1" Text="{Binding Source={StaticResource Settings}, Path=Default.PersonGroupId, Mode=TwoWay}" />
+                    <TextBlock Margin="5" Grid.Row="3" Grid.Column="0" Text="Local files URL:" />
+                    <TextBox   Margin="5" Grid.Row="3" Grid.Column="1" Text="{Binding Source={StaticResource Settings}, Path=Default.LocalUrl, Mode=TwoWay}" />
                     <TextBlock Margin="5" Grid.Row="4" Grid.ColumnSpan="2" TextWrapping="Wrap"><Run Text="Get API keys at "/><Hyperlink NavigateUri="http://www.microsoft.com/cognitive" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="microsoft.com/cognitive"/></Hyperlink></TextBlock>
                     <TextBlock Margin="5" Grid.Row="5" Grid.Column="0" Text="API Call Interval:" />
                     <TextBox   Margin="5" Grid.Row="5" Grid.Column="1" Text="{Binding Source={StaticResource Settings}, Path=Default.AnalysisInterval, Mode=TwoWay}" />
@@ -63,7 +63,7 @@
                     <Run Text="Vision API calls made = "/><Run Text="{Binding Source={StaticResource Settings}, Path=Default.VisionAPICallCount}"/>
                 </TextBlock>
                 <CheckBox Margin="5" IsChecked="{Binding Source={StaticResource Settings}, Path=Default.AutoStopEnabled}" ContentStringFormat="Automatically stop after {0}" Content="{Binding Source={StaticResource Settings}, Path=Default.AutoStopTime}" />
-                <Button Margin="5" Content="Save" Click="SaveSettingsButton_Click" />
+                <Button Margin="5" Content="Save" Click="SaveSettings" />
             </StackPanel>
         </Grid>
         <TextBlock Name="MessageArea" Margin="5" Grid.Row="2" VerticalAlignment="Center" />
